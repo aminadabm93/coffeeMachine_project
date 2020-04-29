@@ -1,0 +1,101 @@
+class CoffeeMachine:   
+ 
+    def __init__(self):
+        self.water_supply= 400
+        self.milk_supply = 540
+        self.coffee_supply = 120
+        self.profit = 550
+        self.cup_supply= 9
+        self.operate()
+        
+    
+    def operate(self):
+        def fill(self):
+            waterFill = int (input('Write how many ml of water do you want to add:'))
+            milkFill = int (input('Write how many ml of milk do you want to add:'))
+            coffeeFill = int(input('Write how many grams of coffee beans do you want to add:'))
+            cupsFill = int(input('Write how many disposable cups of coffee do you want to add:'))
+            
+            self.water_supply+= waterFill
+            self.milk_supply += milkFill
+            self.cup_supply  += cupsFill
+            self.coffee_supply+= coffeeFill
+            
+        def can_make(self,coffee_option):
+            if self.cup_supply <1: return False
+            
+            if coffee_option == "1":
+                if self.water_supply<250:
+                    print("Sorry not enough water!")
+                    return False
+                if self.coffee_supply <16:
+                    print ("Sorry not enough coffee!")
+                    return False
+            if coffee_option == "2":
+                if self.water_supply<350:
+                    print("Sorry not enough water!")
+                    return False
+                if self.coffee_supply< 20:
+                    print("Sorry not enough coffee!")
+                    return False
+                if self.milk_supply<75:
+                    print("Sorry not enough milk!")
+                    return False
+                print("I have enough resources, making your coffee!")
+                return True
+            if coffee_option == "3":
+                if self.water_supply<200:
+                    print("Sorry not enough water!")
+                    return False
+                if self.coffee_supply<12:
+                    print("Sorry not enough coffee!")
+                    return False
+                if self.milk_supply<100:
+                    print("Sorry not enough milk!")
+                    return False
+            print("I have enough resources, making your coffee!")
+            return True
+        def buy(self):
+            choice = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:")
+        
+            if choice =="1" and can_make(self,choice):
+                self.water_supply -= 250
+                self.coffee_supply -= 16
+                self.cup_supply -= 1
+                self.profit += 4
+            if choice =="2" and can_make(self,choice):
+                self.water_supply -= 350
+                self.coffee_supply -= 20
+                self.milk_supply -= 75
+                self.cup_supply -= 1
+                self.profit += 7
+            if choice == "3" and can_make(self,choice):
+                self.water_supply -= 200
+                self.coffee_supply -= 12
+                self.milk_supply -= 100
+                self.cup_supply -= 1
+                self.profit += 6
+        def print_status(self):
+            print ('The coffee machine has:')
+            print(self.water_supply,' of water')
+            print(self.milk_supply, 'of milk')
+            print(self.coffee_supply,' of coffee beans')
+            print(self.cup_supply,' of disposable cups')
+            print(self.profit, ' of money')
+        
+        user_choice = input('Write action (buy, fill, take, remaining, exit):')
+        print("")
+        while user_choice!="exit":
+            if user_choice.startswith("take"):
+                print('I gave you $', self.profit)
+                self.profit = 0
+            elif user_choice.startswith("fill"): fill(self)
+            elif user_choice.startswith("buy"): buy(self)
+            elif user_choice == "remaining": print_status(self)
+            else: break
+            print("")
+            user_choice = input('Write action (buy, fill, take, remaining, exit):')
+            print("")
+        
+    
+machine = CoffeeMachine()    
